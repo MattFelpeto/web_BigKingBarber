@@ -1,0 +1,74 @@
+.section-3 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    background-color: #141412;
+}
+
+.container-sucursales {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+.container-sucursales img {
+    width: 12%;
+    height: auto;
+}
+
+.container-sucursales h1 {
+    color: white;
+    font-weight: lighter;
+    text-align: start;
+    font-size: 28px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.container-sucursales-cards {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 80%;
+    height: 50%;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.card-sucursales {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 50%;
+    background-color: black;
+    border-radius: 15px;
+    padding: 10px;
+    outline: white solid 1px;
+}
+
+.card-sucursales img {
+    display: flex;
+    width: 90%;
+    height: auto;
+}
+
+.btn-agendar {
+    text-decoration: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.329);
+    font-family: 'Roboto Slab', sans-serif;
+    font-size: 12px;
+    margin: 10px;
+    padding: 8px 16px;
+    border: 2px solid white;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}

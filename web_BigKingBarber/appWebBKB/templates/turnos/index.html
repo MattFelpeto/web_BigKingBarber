@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'servicios.css' %}">
+    <link rel="stylesheet" href="{% static 'sucursales.css' %}">
+    <link rel="stylesheet" href="{% static 'redes.css' %}">
+    <title>BK Barber</title>
+</head>
+
+<body>
+    <section class="section-1">
+        <header class="header-main">
+            <nav class="nav">
+                <article class="nav-container-1">
+                    <img class="img-logo-nav" src="{% static 'img/logoBKB.png' %}" alt="BK Barber Logo">
+                </article>
+                <article class="nav-container-2">
+                    <a class="link-turnos" href="{% url 'solicitar_turno' %}">Turnos</a>
+                </article>
+            </nav>
+        </header>
+        <section class="container-text">
+            <article class="container-text-h1">
+                <h1>ARTE EN CADA CORTE</h1>
+            </article>
+            <article class="container-logo-full">
+                <img class="img-main" src="{% static 'img/logoCompletoBKB.png' %}" alt="Imagen Principal BK Barber" />
+            </article>
+        </section>
+    </section>
+    <section class="section-2">
+        <div class="container-section-2">
+            <section class="container-servicios">
+                <img src="{% static 'img/logoBKB.png' %}" alt="BK Barber Logo" />
+                <h1>SERVICIOS</h1>
+                <img src="{% static 'img/logoBKB.png' %}" alt="BK Barber Logo" />
+            </section>
+            <section class="container-cards-servicios">
+                <article class="card-servicios">
+                    <h2>Corte</h2>
+                    <p>Utilizamos las mejores herramientas y conocemos las ultimas tendencias.</p>
+                </article>
+                <article class="card-servicios">
+                    <h2>Barba</h2>
+                    <p>Nos enfocamos en la prolijidad y el estilo para darle forma y fluidez.</p>
+                </article>
+                <article class="card-servicios">
+                    <h2>Tintura</h2>
+                    <p>Las mejores técnicas y productos para darle vida a tus ideas.</p>
+                </article>
+            </section>
+        </div>
+    </section>
+    <section class="section-3">
+        <section class="container-sucursales">
+            <img src="{% static 'img/logoBKB.png' %}" alt="BK Barber Logo" />
+            <h1>SUCURSALES</h1>
+            <img src="{% static 'img/logoBKB.png' %}" alt="BK Barber Logo" />
+        </section>
+        <section class="container-sucursales-cards">
+            <article class="card-sucursales">
+                <img src="{% static 'img/logoSucVdp.png' %}" alt="Sucursal-Vdp">
+            </article>
+            <article class="card-sucursales">
+                <img src="{% static 'img/logoSucDvt.png' %}" alt="Sucursal-Dvt">
+            </article>
+            <a class="btn-agendar" href="{% url 'solicitar_turno' %}">
+                Agendar turno
+            </a>
+        </section>
+    </section>
+    <footer class="section-4">
+        <section class="container-redes-h1">
+            <h1>SEGUINOS EN NUESTRAS REDES</h1>
+        </section>
+        <section class="container-logo-BKB">
+            <img src="{% static 'img/logoCompletoBKB.png' %}" alt="BK Barber Logo" />
+        </section>
+        <section class="container-logos-redes">
+            <img src="{% static 'img/logoIG.png' %}" alt="Instagram Logo"/>
+            <img src="{% static 'img/logoFB.png' %}" alt="Facebook Logo"/>
+        </section>
+        <section class="copy-right">
+            <h6>© BIG KING BARBER. Todos los derechos reservados</h6>
+        </section>
+    </footer>
+</body>
+
+</html>
