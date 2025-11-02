@@ -1,64 +1,71 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
     <title>Turnos BKB</title>
     <link rel="stylesheet" href="{% static 'turnos.css' %}">
 </head>
+
 <body>
-    <h1>Solicitar Turno</h1>
+    <section class="container-h1-turnos">
+        <img src="{% static 'img/logoCompletoBKB.png' %}" />
+    </section>
     {% if error_message %}
-        <p style="color: red;">{{ error_message }}</p>
+    <p style="color: red;">{{ error_message }}</p>
     {% endif %}
 
-    <form method="post" action="{% url 'solicitar_turno' %}">
-        {% csrf_token %}
-        
-        <section class="container-datos-cliente">
-            <h2>Datos Personales</h2>
-            <label for="nombre-cliente">Nombre:</label>
-            <input type="text" name="nombre-cliente" id="nombre-cliente" required>
-            
-            <label for="mail">Email:</label>
-            <input type="email" name="mail" id="mail" required>
-            
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" name="telefono" id="telefono" required>
-        </section>
+    <section class="container-form">
+        <form method="post" action="{% url 'solicitar_turno' %}">
+            {% csrf_token %}
 
-        <section class="datos-turno">
-            <h2>Detalles del Turno</h2>
+            <section class="container-datos-cliente">
+                <label for="nombre-cliente">Nombre:</label>
+                <input type="text" name="nombre-cliente" id="nombre-cliente" required>
 
-            <label for="id_sucursal">Sucursal:</label>
-            <select name="sucursal" id="id_sucursal" required>
-                <option value="">--- Seleccione una Sucursal ---</option>
-                {% for sucursal in sucursales %}
+                <label for="mail">Email:</label>
+                <input type="email" name="mail" id="mail" required>
+
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" name="telefono" id="telefono" required>
+            </section>
+
+            <section class="datos-turno">
+
+                <label for="id_sucursal">Sucursal:</label>
+                <select name="sucursal" id="id_sucursal" required>
+                    <option value="">--- Seleccione una Sucursal ---</option>
+                    {% for sucursal in sucursales %}
                     <option value="{{ sucursal.id }}">{{ sucursal.nombre }}</option>
-                {% endfor %}
-            </select>
+                    {% endfor %}
+                </select>
 
-            <label for="id_barbero">Barbero:</label>
-            <select name="barbero" id="id_barbero" disabled required>
-                <option value="">--- Seleccione Sucursal ---</option>
-            </select>
+                <label for="id_barbero">Barbero:</label>
+                <select name="barbero" id="id_barbero" disabled required>
+                    <option value="">--- Seleccione Sucursal ---</option>
+                </select>
 
-            <label for="id_fecha_turno">Fecha del turno:</label>
-            <input type="date" name="fecha-turno" id="id_fecha_turno" disabled required>
+                <label for="id_fecha_turno">Fecha del turno:</label>
+                <input type="date" name="fecha-turno" id="id_fecha_turno" disabled required>
 
-            <label for="id_hora_turno">Hora del turno:</label>
-            <select name="hora-turno" id="id_hora_turno" disabled required>
-                <option value="">--- Seleccione Fecha ---</option>
-            </select>
-            
-        </section>
+                <label for="id_hora_turno">Hora del turno:</label>
+                <select name="hora-turno" id="id_hora_turno" disabled required>
+                    <option value="">--- Seleccione Fecha ---</option>
+                </select>
 
-        <button type="submit">Confirmar Turno</button>
-    </form>
-    
+            </section>
+            <section class="container-btn">
+            <button class="btn-confirmar" type="submit">Confirmar Turno</button>
+            </section>
+        </form>
+    </section>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const sucursalSelect = document.getElementById('id_sucursal');
             const barberoSelect = document.getElementById('id_barbero');
             const fechaInput = document.getElementById('id_fecha_turno');
@@ -77,17 +84,17 @@
                 fechaInput.disabled = true;
                 resetHora();
             }
-            
+
             function resetHora() {
                 horaSelect.innerHTML = '<option value="">--- Seleccione Fecha ---</option>';
                 horaSelect.disabled = true;
             }
 
             // --- Listener 1: Carga Barberos al seleccionar Sucursal ---
-            sucursalSelect.addEventListener('change', function() {
+            sucursalSelect.addEventListener('change', function () {
                 const sucursalId = this.value;
                 resetBarbero();
-                
+
                 if (sucursalId) {
                     fetch(`/api/barberos_por_sucursal/${sucursalId}/`)
                         .then(response => response.json())
@@ -109,19 +116,19 @@
             });
 
             // --- Listener 2: Habilita Fecha al seleccionar Barbero ---
-            barberoSelect.addEventListener('change', function() {
+            barberoSelect.addEventListener('change', function () {
                 const barberoId = this.value;
                 resetFecha();
-                
+
                 if (barberoId) {
                     fechaInput.disabled = false;
                     const today = new Date().toISOString().split('T')[0];
-                    fechaInput.setAttribute('min', today); 
+                    fechaInput.setAttribute('min', today);
                 }
             });
 
             // --- Listener 3: Carga Horas Disponibles al seleccionar Fecha ---
-            fechaInput.addEventListener('change', function() {
+            fechaInput.addEventListener('change', function () {
                 const barberoId = barberoSelect.value;
                 const fecha = this.value;
                 resetHora();
@@ -148,4 +155,5 @@
         });
     </script>
 </body>
+
 </html>

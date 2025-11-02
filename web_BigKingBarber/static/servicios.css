@@ -64,3 +64,131 @@
     text-align: center;
     color: white;
 }
+
+@media (min-width: 624px) {
+
+    .container-cards-servicios {
+    width: 70%;
+    height: 120%;
+    gap: 25px;
+}
+
+    .container-servicios h1 {
+        font-size: 32px;
+    }
+
+    .card-servicios h2 {
+        font-size: 25px;
+        margin-top: 0;
+    }
+
+    .card-servicios p {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    
+    .container-servicios h1 {
+        font-size: 35px;
+    }
+
+    .container-cards-servicios {
+        flex-direction: row;
+        width: 90%;
+        height: 100%;
+    }
+
+    .card-servicios {
+        width: 100%;
+        height: 70%;
+        justify-content: space-evenly;
+    }
+
+    .card-servicios p {
+        font-size: 23px;
+    }
+
+    .card-servicios h2 {
+        font-size: 35px;
+    }
+
+}
+
+@media (min-width: 900px) {
+    .container-servicios h1 {
+        font-size: 40px;
+    }
+}
+
+@media (min-width: 1200px) {
+    
+    .container-servicios h1 {
+        font-size: 50px;
+    }
+
+    .card-servicios {
+        width: 50%;
+        height: 70%;
+    }
+
+    .card-servicios p {
+        font-size: 30px;
+    }
+
+    .card-servicios h2 {
+        font-size: 50px;
+    }
+
+    .container-servicios img {
+        width: 8%;
+        margin-inline: 50px;
+    }
+
+    .container-servicios {
+        justify-content: center;
+    }
+    
+}
+
+@media (min-width: 1500px) {
+
+    .container-servicios {
+        margin-top: 40px;
+    }
+
+    .container-servicios h1 {
+        font-size: 100px;
+    }
+
+     .container-servicios img {
+        width: 10%;
+        margin-inline: 50px;
+    }
+
+    .container-cards-servicios {
+        gap: 50px;
+        width: 100%;
+        height: 70%;
+        justify-content: center;
+    }
+
+    .card-servicios {
+        width: 100%;
+        height: 70%;
+        margin: 15px;
+    }
+
+    .card-servicios p {
+        font-size: 60px;
+    }
+
+    .card-servicios h2 {
+        font-size: 90px;
+    }
+
+    .container-servicios {
+        justify-content: center;
+    }
+
+}
