@@ -1,22 +1,45 @@
 databases:
-  - name: mysitedb
+  - name: bigkingbarber-db # Nombre descriptivo para la base de datos
     plan: free
-    databaseName: mysite
-    user: mysite
+    databaseName: bigkingbarber_site
+    user: bigkingbarber_user
 
 services:
   - type: web
     plan: free
-    name: mysite
+    name: web-bigkingbarber # Nombre descriptivo para el servicio
     runtime: python
-    buildCommand: './build.sh'
-    startCommand: 'python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker'
+    # Especificar la versión de Python para asegurar consistencia
+    # Si Render usa 3.13.4, es mejor especificarla aquí
+    # pythonVersion: 3.13.4 
+    
+    # Este buildCommand está bien, ya que llama a tu build.sh que contiene collectstatic y migrate.
+    buildCommand: './build.sh' 
+    
+    # EL COMANDO DE INICIO CLAVE: Debe apuntar a web_BigKingBarber.wsgi
+    startCommand: 'gunicorn web_BigKingBarber.wsgi' 
+    
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysitedb
+          name: bigkingbarber-db # Usar el nombre de DB corregido
           property: connectionString
+      
+      # Asegura que DEBUG=False en producción, tal como lo tienes en settings.py
+      - key: DEBUG
+        value: 0
+        
+      # Esta variable de entorno es crucial para la seguridad
       - key: SECRET_KEY
         generateValue: true
+      
+      # WhiteNoise necesita el host externo que Render inyecta, 
+      # aunque Django ya lo lee automáticamente con RENDER_EXTERNAL_HOSTNAME, es buena práctica.
+      - key: RENDER_EXTERNAL_HOSTNAME 
+        fromService:
+          type: web
+          name: web-bigkingbarber
+          property: host
+      
       - key: WEB_CONCURRENCY
         value: 4
