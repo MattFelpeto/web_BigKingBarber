@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-from os.path import join
+# Eliminamos 'from os.path import join' para usar os.path.join directamente.
 import dj_database_url 
 import os
 
@@ -131,15 +131,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Directorio donde Django buscará archivos estáticos
-STATICFILES_DIRS = (
-    join(BASE_DIR, 'static'),
-)
+# USAMOS LA RUTA UNIFICADA DE os.path.join Y LA HACEMOS UNA LISTA
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
+if not DEBUG:
 # Directorio donde WhiteNoise buscará archivos estáticos en producción
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Configuración de WhiteNoise para producción (si DEBUG es False)
-if not DEBUG:
     # Habilitar WhiteNoise storage para compresión y manejo de caché
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
