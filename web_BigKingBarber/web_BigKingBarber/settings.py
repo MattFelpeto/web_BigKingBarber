@@ -131,9 +131,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Directorio donde Django buscará archivos estáticos
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATICFILES_DIRS = (
+    join(BASE_DIR, 'static'),
+)
 
 # Directorio donde WhiteNoise buscará archivos estáticos en producción
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
