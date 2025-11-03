@@ -23,12 +23,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#bg-l_jgt0d8dbvmmc8&)q1fg7f#hnl9$7avu^v#)wu5y@&sr$'
+# Recomiendo usar una variable de entorno para el SECRET_KEY en Render
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-#bg-l_jgt0d8dbvmmc8&)q1fg7f#hnl9$7avu^v#)wu5y@&sr$')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# Usa una variable de entorno para controlar DEBUG en Render (por seguridad)
+DEBUG = os.environ.get('DEBUG', '0') == '1' 
 
-ALLOWED_HOSTS = ['web-bigkingbarber.onrender.com']
+# --- CONFIGURACIÓN DE HOSTS (Solución para el error 400 anterior, más robusta) ---
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# --- FIN CONFIGURACIÓN DE HOSTS ---
 
 
 # Application definition
@@ -45,7 +53,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # WhiteNoise debe ir justo después de SecurityMiddleware
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,7 +86,7 @@ WSGI_APPLICATION = 'web_BigKingBarber.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = DATABASES = {
+DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL', 'postgresql://matt_felpeto:kp9KkOWUHVgSwrvI6UQAlyGiEAsTBRBg@dpg-d3mpsph5pdvs73bu94a0-a/task_db_i1m5'),
         conn_max_age=600
@@ -120,17 +129,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    join(BASE_DIR, 'static'),
-)
 
+# Directorio donde Django buscará archivos estáticos
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Directorio donde WhiteNoise buscará archivos estáticos en producción
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Configuración de WhiteNoise para producción (si DEBUG es False)
 if not DEBUG:
-    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
-    # and renames the files with unique names for each version to support long-term caching
+    # Habilitar WhiteNoise storage para compresión y manejo de caché
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
