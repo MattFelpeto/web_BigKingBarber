@@ -8,4 +8,3 @@ pip install -r requirements.txt
 python manage.py collectstatic --no-input
 
 # 3. NOTA: El comando 'migrate' se ha movido al startCommand en render.yaml
-python manage.py migrate

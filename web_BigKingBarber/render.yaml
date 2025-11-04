@@ -13,7 +13,7 @@ services:
     # buildCommand debe estar así si tu build.sh está en la raíz:
     buildCommand: './build.sh' 
     
-    startCommand: 'python web_BigKingBarber/manage.py migrate --no-input && gunicorn web_BigKingBarber.wsgi'
+    startCommand: 'python manage.py migrate --no-input && gunicorn web_BigKingBarber.wsgi'
     
     envVars:
       - key: DATABASE_URL
