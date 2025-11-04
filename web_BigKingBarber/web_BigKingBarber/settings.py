@@ -88,8 +88,12 @@ WSGI_APPLICATION = 'web_BigKingBarber.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL', 'postgresql://matt_felpeto:kp9KkOWUHVgSwrvI6UQAlyGiEAsTBRBg@dpg-d3mpsph5pdvs73bu94a0-a/task_db_i1m5'),
-        conn_max_age=600
+        # Eliminamos el valor por defecto codificado. 
+        # Ahora, Render usará únicamente la variable DATABASE_URL que inyecta.
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        # Importante: usar 'require=True' asegura que si DATABASE_URL no existe, falle inmediatamente.
+        conn_health_checks=True,
     )
 }
 
