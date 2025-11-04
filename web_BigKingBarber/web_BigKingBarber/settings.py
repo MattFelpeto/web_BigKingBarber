@@ -15,8 +15,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-django-secret-key-for-local-d
 
 # Modifica estas lineas para el despliegue en Render:
 
-# 1. DEBUG: Volvemos a False para el entorno de producción.
-DEBUG = True
+# 1. DEBUG: Lo volvemos a False. ¡El error 500 ya fue resuelto!
+DEBUG = False
 
 # 2. ALLOWED_HOSTS: Se recomienda usar '*' para permitir el acceso desde Render.
 ALLOWED_HOSTS = ['*']
@@ -24,13 +24,13 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'appWebBKB.apps.AppwebbkbConfig',
+    'appWebBKB.apps.AppwebbkbConfig', # Referencia corregida a tu AppConfig
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',  # Asumiendo que esta es tu aplicación de turnos
+    'django.contrib.staticfiles', 
     # Otras apps deben ir aquí
 ]
 
@@ -140,6 +140,10 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+# Línea crucial para que Django/WhiteNoise sepa dónde buscar en Render
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Opcional, pero recomendado para producción:
 SECURE_SSL_REDIRECT = True
