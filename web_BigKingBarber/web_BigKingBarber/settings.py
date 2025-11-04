@@ -1,141 +1,65 @@
-from pathlib import Path
-import dj_database_url 
 import os
+from pathlib import Path
+import dj_database_url # Importar dj_database_url para parsear la URL de PostgreSQL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Asegúrate de que BASE_DIR esté definido correctamente en tu archivo original.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+# Modifica estas lineas para el despliegue en Render:
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# Recomiendo usar una variable de entorno para el SECRET_KEY en Render
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-#bg-l_jgt0d8dbvmmc8&)q1fg7f#hnl9$7avu^v#)wu5y@&sr$')
+# 1. DEBUG: Volvemos a False para el entorno de producción.
+DEBUG = False
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# Usa una variable de entorno para controlar DEBUG en Render (por seguridad)
-DEBUG = os.environ.get('DEBUG', '0') == '1' 
+# 2. ALLOWED_HOSTS: Se recomienda usar '*' para permitir el acceso desde Render.
+ALLOWED_HOSTS = ['*']
 
-# --- CONFIGURACIÓN DE HOSTS (Solución para el error 400 anterior, más robusta) ---
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+# ... (El resto de tus configuraciones, como INSTALLED_APPS, MIDDLEWARE, etc., deben seguir aquí) ...
 
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-# --- FIN CONFIGURACIÓN DE HOSTS ---
-
-
-# Application definition
-
-INSTALLED_APPS = [
-    'appWebBKB.apps.AppwebbkbConfig',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-]
-
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    # WhiteNoise debe ir justo después de SecurityMiddleware
-    'whitenoise.middleware.WhiteNoiseMiddleware', 
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
-ROOT_URLCONF = 'web_BigKingBarber.urls'
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
-WSGI_APPLICATION = 'web_BigKingBarber.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# --- CONFIGURACIÓN DE BASE DE DATOS PARA RENDER ---
+# Usamos dj-database-url para configurar la base de datos usando la variable de entorno
 DATABASES = {
     'default': dj_database_url.config(
-        # CORRECCIÓN CRUCIAL: Se añade una URL de fallback para evitar el error ImproperlyConfigured
-        # Si DATABASE_URL no existe, usa esta URL dummy que al menos especifica el motor (postgres).
-        default=os.environ.get('DATABASE_URL', 'postgres://user:pass@host/db_name_placeholder'),
-        conn_max_age=600,
-        conn_health_checks=True,
+        # La URL de la base de datos de Render se inyecta aquí automáticamente
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600, 
+        conn_health_check=True,
     )
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+# Si la variable de entorno no está definida (ej: desarrollo local sin variable), 
+# usa una configuración de SQLite local por defecto
+if not os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+# --- FIN CONFIGURACIÓN DE BASE DE DATOS ---
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
+# --- CONFIGURACIÓN DE ARCHIVOS ESTÁTICOS (MANDATORIA PARA RENDER) ---
+# Este es el directorio donde 'collectstatic' reunirá todos los archivos estáticos.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
+# La URL para referenciar archivos estáticos
 STATIC_URL = '/static/'
 
-# Directorio donde Django buscará archivos estáticos
-# USAMOS LA RUTA UNIFICADA DE os.path.join Y LA HACEMOS UNA LISTA
+# Directorios adicionales donde Django buscará archivos estáticos (opcional, si no están dentro de las apps)
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'static'), # Descomenta si tienes una carpeta 'static' en la raíz
 ]
 
-if not DEBUG:
-# Directorio donde WhiteNoise buscará archivos estáticos en producción
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Configuración de WhiteNoise para servir archivos estáticos comprimidos y cacheados
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
-# Configuración de WhiteNoise para producción (si DEBUG es False)
-    # Habilitar WhiteNoise storage para compresión y manejo de caché
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Opcional, pero recomendado para producción:
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# (Asegúrate de que 'whitenoise.middleware.WhiteNoiseMiddleware' esté en tu MIDDLEWARE)
