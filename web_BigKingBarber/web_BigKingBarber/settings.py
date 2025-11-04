@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-import dj_database_url # Importar dj_database_url para parsear la URL de PostgreSQL
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +20,6 @@ DEBUG = False
 
 # 2. ALLOWED_HOSTS: Se recomienda usar '*' para permitir el acceso desde Render.
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -70,21 +69,23 @@ WSGI_APPLICATION = 'web_BigKingBarber.wsgi.application' # Ajusta si el nombre de
 
 # --- CONFIGURACIÓN DE BASE DE DATOS PARA RENDER ---
 # Usamos dj-database-url para configurar la base de datos usando la variable de entorno
-DATABASES = {
-    'default': dj_database_url.config(
-        # La URL de la base de datos de Render se inyecta aquí automáticamente
-        default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600, 
-        conn_health_check=True,
-    )
-}
-
-# Si la variable de entorno no está definida (ej: desarrollo local sin variable), 
-# usa una configuración de SQLite local por defecto
-if not os.environ.get('DATABASE_URL'):
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# La configuración prioriza la variable de entorno DATABASE_URL de Render si existe.
+if os.environ.get('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600, 
+            # Corregido el error de sintaxis: 'conn_health_check' -> 'conn_health_checks'
+            conn_health_checks=True,
+        )
+    }
+else:
+    # Configuración de desarrollo local (SQLite)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
 # --- FIN CONFIGURACIÓN DE BASE DE DATOS ---
 
@@ -135,6 +136,7 @@ STATICFILES_DIRS = [
 # Configuración de WhiteNoise para servir archivos estáticos comprimidos y cacheados
 STORAGES = {
     "staticfiles": {
+        # Usamos CompressedManifestStaticFilesStorage para optimización de caché en producción
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
