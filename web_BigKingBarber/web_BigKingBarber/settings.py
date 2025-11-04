@@ -24,13 +24,13 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'appWebBKB.apps.AppwebbkbConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', 
-    'turnos', # Asumiendo que esta es tu aplicación de turnos
+    'django.contrib.staticfiles',  # Asumiendo que esta es tu aplicación de turnos
     # Otras apps deben ir aquí
 ]
 
