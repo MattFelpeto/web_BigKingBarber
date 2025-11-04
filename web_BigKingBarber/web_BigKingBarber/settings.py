@@ -15,10 +15,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-#bg-l_jgt0d8dbvmmc8&)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Usa una variable de entorno para controlar DEBUG en Render (por seguridad)
-DEBUG = True#os.environ.get('DEBUG', '0') == '1' 
+DEBUG = os.environ.get('DEBUG', '0') == '1' 
 
 # --- CONFIGURACIÓN DE HOSTS (Solución para el error 400 anterior, más robusta) ---
-ALLOWED_HOSTS = ['*']#['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 
 if RENDER_EXTERNAL_HOSTNAME:
