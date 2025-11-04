@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-django-secret-key-for-local-d
 # Modifica estas lineas para el despliegue en Render:
 
 # 1. DEBUG: Volvemos a False para el entorno de producción.
-DEBUG = False
+DEBUG = True
 
 # 2. ALLOWED_HOSTS: Se recomienda usar '*' para permitir el acceso desde Render.
 ALLOWED_HOSTS = ['*']
