@@ -18,12 +18,17 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-django-secret-key-for-local-d
 # 1. DEBUG: Correctamente en False para producción.
 DEBUG = False
 
-# 2. ALLOWED_HOSTS: Configuración de producción para Render.
-#    Render inyecta automáticamente el nombre del host en esta variable de entorno.
-ALLOWED_HOSTS = ['web-bigkingbarber.onrender.com']
-#RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-#if RENDER_EXTERNAL_HOSTNAME:
-#    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# 2. ALLOWED_HOSTS: ¡LA CORRECCIÓN CRÍTICA ESTÁ AQUÍ!
+#    Añadimos tu dominio de Render manualmente porque la variable de entorno
+#    RENDER_EXTERNAL_HOSTNAME no es fiable en el momento del inicio.
+ALLOWED_HOSTS = [
+    'web-bigkingbarber.onrender.com', # Tu dominio principal
+]
+
+# Mantenemos la lógica de la variable de entorno por si Render la inyecta a tiempo
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
@@ -156,7 +161,7 @@ CSRF_COOKIE_SECURE = True
 
 # LA LÍNEA MÁS IMPORTANTE PARA EVITAR EL ERROR 500 CON SSL_REDIRECT:
 # Le dice a Django que confíe en el encabezado 'X-Forwarded-Proto' de Render.
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'httpss')
 
 
 # Default primary key field type
