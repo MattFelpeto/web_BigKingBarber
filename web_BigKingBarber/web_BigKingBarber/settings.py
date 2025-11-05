@@ -28,7 +28,7 @@ ALLOWED_HOSTS = [
 
 # Mantenemos la lógica de la variable de entorno por si Render la inyecta a tiempo
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
+if RENDER_EXTERNAL_HOSTNAME and RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
@@ -144,11 +144,13 @@ STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'static'), # Descomenta si tienes una carpeta 'static' en la raíz
 ]
 
+# --- ¡LA CORRECCIÓN DEL ERROR 500 ESTÁ AQUÍ! ---
 # Configuración de WhiteNoise para servir archivos estáticos comprimidos y cacheados
 STORAGES = {
     "staticfiles": {
-        # Usamos CompressedManifestStaticFilesStorage para optimización de caché en producción
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # Cambiamos de 'CompressedManifestStaticFilesStorage' (que da error 500 si falta un archivo)
+        # a 'CompressedStaticFilesStorage' (que solo dará 404, pero no rompe el sitio).
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 
