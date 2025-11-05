@@ -15,11 +15,16 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-django-secret-key-for-local-d
 
 # Modifica estas lineas para el despliegue en Render:
 
-# 1. DEBUG: Lo volvemos a False. ¡El error 500 ya fue resuelto!
+# 1. DEBUG: Correctamente en False para producción.
 DEBUG = False
 
-# 2. ALLOWED_HOSTS: Se recomienda usar '*' para permitir el acceso desde Render.
-ALLOWED_HOSTS = ['*']
+# 2. ALLOWED_HOSTS: Configuración de producción para Render.
+#    Render inyecta automáticamente el nombre del host en esta variable de entorno.
+ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 
 # Application definition
 
@@ -141,14 +146,18 @@ STORAGES = {
     },
 }
 
-# Línea crucial para que Django/WhiteNoise sepa dónde buscar en Render
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# --- CONFIGURACIÓN DE SEGURIDAD PARA PRODUCCIÓN (HTTPS/PROXY) ---
 
 # Opcional, pero recomendado para producción:
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+# LA LÍNEA MÁS IMPORTANTE PARA EVITAR EL ERROR 500 CON SSL_REDIRECT:
+# Le dice a Django que confíe en el encabezado 'X-Forwarded-Proto' de Render.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
