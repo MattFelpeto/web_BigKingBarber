@@ -145,7 +145,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     # (Nombre del prefijo, Ruta a la carpeta)
     # Esto hará que 'collectstatic' cree: 'staticfiles/appWebBKB/style.css'
-    ('appWebBKB', os.path.join(BASE_DIR, 'appWebBKB', 'static')),
+    (os.path.join(BASE_DIR, 'appWebBKB', 'static')),
 ]
 
 # Configuración de WhiteNoise para servir archivos estáticos comprimidos y cacheados
