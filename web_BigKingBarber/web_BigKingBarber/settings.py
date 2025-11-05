@@ -18,11 +18,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-django-secret-key-for-local-d
 # 1. DEBUG: Correctamente en False para producción.
 DEBUG = False
 
-# 2. ALLOWED_HOSTS: ¡CORRECCIÓN CRÍTICA!
-#    Añadimos tu dominio de Render manualmente porque la variable de entorno
-#    RENDER_EXTERNAL_HOSTNAME no es fiable en el momento del inicio.
+# 2. ALLOWED_HOSTS: ¡LA CORRECCIÓN CRÍTICA ESTÁ AQUÍ!
+#    Añadimos '127.0.0.1' para que el Health Check de Render (que viene de localhost)
+#    no falle y provoque un error 500.
 ALLOWED_HOSTS = [
     'web-bigkingbarber.onrender.com', # Tu dominio principal
+    '127.0.0.1',                      # Para el Health Check de Render
 ]
 
 # Mantenemos la lógica de la variable de entorno por si Render la inyecta a tiempo
@@ -154,9 +155,7 @@ STORAGES = {
 
 # --- CONFIGURACIÓN DE SEGURIDAD PARA PRODUCCIÓN (HTTPS/PROXY) ---
 
-# ¡LA CORRECCIÓN ESTÁ AQUÍ!
 # Comentamos la redirección SSL de Django porque Render ya la maneja.
-# Esto es lo que está causando el bucle de redirección 301.
 # SECURE_SSL_REDIRECT = True
 
 # Estas líneas son seguras y recomendadas.
