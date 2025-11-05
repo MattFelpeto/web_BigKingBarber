@@ -127,7 +127,7 @@ LANGUAGE_CODE = 'es-ar' # Configurado a español de Argentina
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires' # Configurado a zona horaria de Argentina
 
-USE_I18N = True
+USE_I1N = True
 
 USE_TZ = True
 
@@ -139,17 +139,19 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # La URL para referenciar archivos estáticos
 STATIC_URL = '/static/'
 
-# Directorios adicionales donde Django buscará archivos estáticos (opcional, si no están dentro de las apps)
+# --- ¡LA CORRECCIÓN DEL ERROR 404 ESTÁ AQUÍ! ---
+# Le decimos a Django dónde encontrar los archivos estáticos de tu aplicación
+# y cómo deben prefijarse en la carpeta 'staticfiles'.
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, 'static'), # Descomenta si tienes una carpeta 'static' en la raíz
+    # (Nombre del prefijo, Ruta a la carpeta)
+    # Esto hará que 'collectstatic' cree: 'staticfiles/appWebBKB/style.css'
+    ('appWebBKB', os.path.join(BASE_DIR, 'appWebBKB', 'static')),
 ]
 
-# --- ¡LA CORRECCIÓN DEL ERROR 500 ESTÁ AQUÍ! ---
 # Configuración de WhiteNoise para servir archivos estáticos comprimidos y cacheados
 STORAGES = {
     "staticfiles": {
-        # Cambiamos de 'CompressedManifestStaticFilesStorage' (que da error 500 si falta un archivo)
-        # a 'CompressedStaticFilesStorage' (que solo dará 404, pero no rompe el sitio).
+        # Usamos CompressedStaticFilesStorage para que no falle si falta un archivo (da 404 en lugar de 500)
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
