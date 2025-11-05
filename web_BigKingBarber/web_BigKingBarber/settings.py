@@ -18,7 +18,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-django-secret-key-for-local-d
 # 1. DEBUG: Correctamente en False para producción.
 DEBUG = False
 
-# 2. ALLOWED_HOSTS: ¡LA CORRECCIÓN CRÍTICA ESTÁ AQUÍ!
+# 2. ALLOWED_HOSTS: ¡CORRECCIÓN CRÍTICA!
 #    Añadimos tu dominio de Render manualmente porque la variable de entorno
 #    RENDER_EXTERNAL_HOSTNAME no es fiable en el momento del inicio.
 ALLOWED_HOSTS = [
@@ -154,13 +154,14 @@ STORAGES = {
 
 # --- CONFIGURACIÓN DE SEGURIDAD PARA PRODUCCIÓN (HTTPS/PROXY) ---
 
-# Opcional, pero recomendado para producción:
-SECURE_SSL_REDIRECT = True
+# ¡LA CORRECCIÓN ESTÁ AQUÍ!
+# Comentamos la redirección SSL de Django porque Render ya la maneja.
+# Esto es lo que está causando el bucle de redirección 301.
+# SECURE_SSL_REDIRECT = True
+
+# Estas líneas son seguras y recomendadas.
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-
-# LA LÍNEA MÁS IMPORTANTE PARA EVITAR EL BUCLE DE REDIRECCIÓN (301):
-# Corregido de 'httpss' (incorrecto) a 'https' (correcto).
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
