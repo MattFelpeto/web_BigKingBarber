@@ -159,9 +159,9 @@ SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-# LA LÍNEA MÁS IMPORTANTE PARA EVITAR EL ERROR 500 CON SSL_REDIRECT:
-# Le dice a Django que confíe en el encabezado 'X-Forwarded-Proto' de Render.
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'httpss')
+# LA LÍNEA MÁS IMPORTANTE PARA EVITAR EL BUCLE DE REDIRECCIÓN (301):
+# Corregido de 'httpss' (incorrecto) a 'https' (correcto).
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Default primary key field type
