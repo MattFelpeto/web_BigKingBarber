@@ -3,104 +3,200 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'appWebBKB/style.css' %}">
-    <link rel="stylesheet" href="{% static 'appWebBKB/servicios.css' %}">
-    <link rel="stylesheet" href="{% static 'appWebBKB/sucursales.css' %}">
-    <link rel="stylesheet" href="{% static 'appWebBKB/redes.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.25.0/dist/css/uikit.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="{% static 'appWebBKB/index.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
     <title>BK Barber</title>
 </head>
 
 <body>
-    <section class="section-1">
-        <header class="header-main">
-            <nav class="nav">
-                <article class="nav-container-1">
-                    <img class="img-logo-nav" src="{% static 'appWebBKB/img/logoBKB.png' %}" alt="BK Barber Logo">
-                </article>
-                <article class="nav-container-2">
-                    <a class="link-turnos" href="{% url 'solicitar_turno' %}">Turnos</a>
-                </article>
+
+    <section class="first-section uk-height-viewport uk-background-cover uk-flex uk-flex-column"
+        data-src="{% static 'appWebBKB/img/fondoPrincipal.png' %}" uk-img>
+
+        <header class="uk-width-1-1  uk-flex-none">
+            <nav class="uk-navbar-transparent uk-margin">
+                <div class="navbar uk-container uk-flex uk-flex-row uk-flex-between uk-flex-middle" uk-navbar>
+                    <div uk-navbar="mode: click">
+                        <div class="uk-navbar-left">
+                            <a class="button-nav uk-navbar-toggle" uk-navbar-toggle-icon href="#"></a>
+                            <div class="navbar-side uk-navbar-dropdown">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li class="uk-active"><a href="#">HOME</a></li>
+                                    <li><a href="#id-servicios" uk-scroll>Servicios</a></li>
+                                    <li><a href="#id-sucursales" uk-scrol>Sucursales</a></li>
+                                    <li><a href="#">Nuestras redes</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <section>
+                        <a class="button-nav-turnos uk-button uk-button-default"
+                            href="{% url 'solicitar_turno' %}">Turnos</a>
+                    </section>
+                </div>
             </nav>
         </header>
-        <section class="container-text">
-            <article class="container-text-h1">
-                <h1>ARTE EN CADA CORTE</h1>
-            </article>
-                <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-                    <h3 class="uk-card-title">Default</h3>
-                    <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+        <section class="uk-width-1-1 uk-flex uk-flex-center">
+
+            <div class="uk-position-relative uk-flex-initial uk-visible-toggle uk-light uk-width-4-5@m" tabindex="-1"
+                uk-slideshow="animation: scale; autoplay: true; autoplay-interval: 2000">
+
+                <ul class="uk-slideshow-items uk-flex-initial">
+                    <li>
+                        <img class="image-slide" src="{% static 'appWebBKB/img/cardCorte.png' %}" alt="" uk-cover>
+                    </li>
+                    <li>
+                        <img class="image-slide" src="{% static 'appWebBKB/img/cardBarba.png' %}" alt="" uk-cover>
+                    </li>
+                    <li>
+                        <img class="image-slide" src="{% static 'appWebBKB/img/cardTintura.png' %}" alt="" uk-cover>
+                    </li>
+                </ul>
+
+                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous
+                    uk-slideshow-item="previous"></a>
+                <a class="uk-position-center-right uk-position-small uk-hidden-hover" href uk-slidenav-next
+                    uk-slideshow-item="next"></a>
+
+            </div>
+        </section>
+
+        <section class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle uk-flex-auto uk-padding-small">
+            <img class="uk-width-2-3 uk-flex-center uk-flex-middle"
+                src="{% static 'appWebBKB/img/logoCompletoBKB.png' %}" alt="logo-BKB" uk-img />
+        </section>
+
+    </section>
+
+    <section class="second-section uk-height-viewport uk-flex uk-flex-column">
+        <section
+            class="uk-section uk-width-1-1 uk-height-1-1  uk-margin-top uk-padding-small uk-flex uk-flex-column uk-flex-center uk-text-center"
+            uk-scrollspy="cls: uk-animation-slide-bottom; repeat: true">
+            <h1 id="id-servicios" class="h1-servicios">SERVICIOS</h1>
+        </section>
+
+        <div class="uk-position-relative uk-align-center uk-visible-toggle uk-light
+            uk-width-1-1 uk-width-3-4@s uk-width-2-3@m uk-width-1-2@l uk-width-1-3@xl" tabindex="-1"
+            uk-slider="clsActivated: uk-transition-active; center: true">
+
+            <div class="uk-slider-items uk-grid">
+                <div class="uk-width-4-5 uk-width-3-4@s uk-width-2-4@l">
+                    <div class="uk-panel">
+                        <img src="{% static 'appWebBKB/img/cardcorte.png' %}" width="1800" height="1500" alt=""
+                            class="**uk-img**">
+                        <div
+                            class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                            <h3 class="uk-margin-remove">Corte</h3>
+                            <p class="uk-margin-remove">Utilizamos las mejores herramientas y conocemos las ultimas
+                                tendencias.</p>
+                        </div>
+                    </div>
                 </div>
-            <article class="container-logo-full">
-                <img class="img-main" src="{% static 'appWebBKB/img/logoCompletoBKB.png' %}" alt="Imagen Principal BK Barber" />
-            </article>
-        </section>
-    </section>
-    <section class="section-2">
-        <div class="container-section-2">
-            <section class="container-servicios">
-                <img src="{% static 'appWebBKB/img/logoBKB.png' %}" alt="BK Barber Logo" />
-                <h1>SERVICIOS</h1>
-                <img src="{% static 'appWebBKB/img/logoBKB.png' %}" alt="BK Barber Logo" />
-            </section>
-            <section class="container-cards-servicios">
-                <article class="card-servicios">
-                    <h2>Corte</h2>
-                    <p>Utilizamos las mejores herramientas y conocemos las ultimas tendencias.</p>
-                </article>
-                <article class="card-servicios">
-                    <h2>Barba</h2>
-                    <p>Nos enfocamos en la prolijidad y el estilo para darle forma y fluidez.</p>
-                </article>
-                <article class="card-servicios">
-                    <h2>Tintura</h2>
-                    <p>Las mejores técnicas y productos para darle vida a tus ideas.</p>
-                </article>
-            </section>
+                <div class="uk-width-4-5 uk-width-3-4@s uk-width-2-4@l">
+                    <div class="uk-panel">
+                        <img src="{% static 'appWebBKB/img/cardBarba.png' %}" width="1800" height="1500" alt=""
+                            class="**uk-img**">
+                        <div
+                            class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                            <h3 class="uk-margin-remove">Barba</h3>
+                            <p class="uk-margin-remove">Nos enfocamos en la prolijidad y el estilo para darle forma y
+                                fluidez.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-4-5 uk-width-3-4@s uk-width-2-4@l">
+                    <div class="uk-panel">
+                        <img src="{% static 'appWebBKB/img/cardTintura.png' %}" width="1800" height="1500" alt=""
+                            class="uk-img">
+                        <div
+                            class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                            <h3 class="uk-margin-remove">Tintura</h3>
+                            <p class="uk-margin-remove">Las mejores técnicas y productos para darle vida a tus ideas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous
+                uk-slider-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href uk-slidenav-next
+                uk-slider-item="next"></a>
         </div>
+
+        <section
+            class="uk-section uk-width-4-5 uk-width-3-4@s uk-width-1-3@l uk-height-1-1 uk-padding-small uk-margin-bottom uk-flex uk-flex-column uk-flex-center uk-align-center uk-text-center"
+            uk-scrollspy="cls: uk-animation-slide-bottom; repeat: true">
+            <a class="button-turnos uk-button uk-button-default uk-button-small"
+                href="{% url 'solicitar_turno' %}">Agendar turno</a>
+            <img class="uk-width-1-4 uk-margin-auto uk-flex-center uk-flex-middle"
+                src="{% static 'appWebBKB/img/logoBKB.png' %}" alt="logo-BKB" uk-img />
+        </section>
+
     </section>
-    <section class="section-3">
-        <section class="container-sucursales">
-            <img src="{% static 'appWebBKB/img/logoBKB.png' %}" alt="BK Barber Logo" />
-            <h1>SUCURSALES</h1>
-            <img src="{% static 'appWebBKB/img/logoBKB.png' %}" alt="BK Barber Logo" />
-        </section>
-        <section class="container-sucursales-cards">
-            <article class="card-sucursales">
-                <img src="{% static 'appWebBKB/img/vdp.png' %}" alt="Sucursal-Vdp">
-            </article>
-            <article class="card-sucursales">
-                <img src="{% static 'appWebBKB/img/dvt.png' %}" alt="Sucursal-Dvt">
-            </article>
-        </section>
-        <article>
-            <a class="btn-agendar" href="{% url 'solicitar_turno' %}">
-                Agendar turno
-            </a>
-        </article>
+
+<div class="uk-background-fixed uk-background-cover uk-height-medium uk-width-large uk-flex uk-flex-center uk-flex-middle" 
+     data-src="{% static 'appWebBKB/img/fondoCorte.png' %}" uk-img>
+    
+    <section class="uk-width-1-1 uk-flex uk-flex-column uk-flex-center uk-flex-middle"> 
+        <h1 class="h1-cut uk-text-center">THE KING OF BARBERSHOPS</h1>
+        <img class="uk-width-1-4 uk-margin-auto uk-flex-center uk-flex-middle"
+                src="{% static 'appWebBKB/img/logoBKB.png' %}" alt="logo-BKB" uk-img />
+        <h3 class="h3-cut uk-text-center">SINCE 2015</h3>
     </section>
-    <footer class="section-4">
-        <section class="container-redes-h1">
-            <h1>SEGUINOS EN NUESTRAS REDES</h1>
+</div>
+
+    <section class="third-section uk-height-viewport uk-flex uk-flex-center uk-flex-column">
+        <section
+            class="uk-section uk-width-1-1 uk-height-1-1 uk-margin-top uk-padding-small uk-flex uk-flex-column uk-flex-center uk-text-center"
+            uk-scrollspy="cls: uk-animation-slide-bottom; repeat: true">
+            <h1 id="id-sucursales" class="h1-servicios">SUCURSALES</h1>
         </section>
-        <section class="container-logo-BKB">
-            <img src="{% static 'appWebBKB/img/logoCompletoBKB.png' %}" alt="BK Barber Logo" />
+
+        <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-padding-small uk-flex-auto uk-flex-center"
+            uk-grid uk-scrollspy="target: > div; cls: uk-animation-slide-bottom; delay: 200; repeat: true">
+
+            <div>
+                <div class="card-suc uk-card uk-card-default uk-card-body uk-text-center">
+                    <span uk-icon="icon: location; ratio: 2"></span>
+                    <h3 class="card-suc-h3">Sucursal Villa del Parque</h3>
+                    <p>Baigorria 3354</p>
+                    <p>WhatsApp: 11-2276-8765</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="card-suc uk-card uk-card-default uk-card-body uk-text-center">
+                    <span uk-icon="icon: location; ratio: 2"></span>
+                    <h3 class="card-suc-h3">Sucursal Villa Devoto</h3>
+                    <p>Av. Beiró 4576</p>
+                    <p>WhatsApp: 11-2564-7865</p>
+                </div>
+            </div>
+        </div>
+        <section
+            class="uk-section uk-width-4-5 uk-width-3-4@s uk-width-1-3@l uk-height-1-4 uk-padding-small uk-margin-bottom uk-flex uk-flex-column uk-flex-center uk-align-center uk-text-center"
+            uk-scrollspy="cls: uk-animation-slide-bottom; repeat: true">
+            <a class="button-turnos uk-button uk-button-default uk-button-small"
+                href="{% url 'solicitar_turno' %}">Agendar turno</a>
         </section>
-        <section class="container-logos-redes">
-            <img src="{% static 'appWebBKB/img/logoIG.png' %}" alt="Instagram Logo" />
-            <img src="{% static 'appWebBKB/img/logoFB.png' %}" alt="Facebook Logo" />
-        </section>
-        <section class="copy-right">
-            <h6>© BIG KING BARBER. Todos los derechos reservados</h6>
-        </section>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.25.0/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.25.0/dist/js/uikit-icons.min.js"></script>
+    </section>
+
+    <script src="uikit/dist/js/uikit-icons.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit-icons.min.js"></script>
 </body>
 
 </html>
