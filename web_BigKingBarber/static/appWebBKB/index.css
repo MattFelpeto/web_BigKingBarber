@@ -21,6 +21,10 @@
     box-sizing: border-box;
 }
 
+.slideshow-items {
+    height:100%;
+}
+
 .first-p {
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
@@ -80,5 +84,21 @@
 }
 
 .card-suc-h3 {
+    color: white;
+}
+
+.h1-redes {
+    font-family: 'Alfa Slab One', cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    color: #FFFFFF;
+}
+
+.icon-redes {
+    color: white;
+}
+
+.p-copyright {
     color: white;
 }

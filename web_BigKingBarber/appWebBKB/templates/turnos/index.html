@@ -3,7 +3,7 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +22,8 @@
 
 <body>
 
+    <!-- ****** PRIMERA SECCIÓN: BANNER Y NAVEGACIÓN ****** -->
+
     <section class="first-section uk-height-viewport uk-background-cover uk-flex uk-flex-column"
         data-src="{% static 'appWebBKB/img/fondoPrincipal.png' %}" uk-img>
 
@@ -36,7 +38,7 @@
                                     <li class="uk-active"><a href="#">HOME</a></li>
                                     <li><a href="#id-servicios" uk-scroll>Servicios</a></li>
                                     <li><a href="#id-sucursales" uk-scrol>Sucursales</a></li>
-                                    <li><a href="#">Nuestras redes</a></li>
+                                    <li><a href="#id-redes">Nuestras redes</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -51,18 +53,18 @@
 
         <section class="uk-width-1-1 uk-flex uk-flex-center">
 
-            <div class="uk-position-relative uk-flex-initial uk-visible-toggle uk-light uk-width-4-5@m" tabindex="-1"
+            <div class="uk-position-relative uk-flex-initial uk-visible-toggle uk-light uk-width-4-5@m uk-height-medium uk-height-small@s" tabindex="-1"
                 uk-slideshow="animation: scale; autoplay: true; autoplay-interval: 2000">
 
-                <ul class="uk-slideshow-items uk-flex-initial">
+                <ul class="slideshow-items uk-slideshow-items uk-flex-initial">
                     <li>
-                        <img class="image-slide" src="{% static 'appWebBKB/img/cardCorte.png' %}" alt="" uk-cover>
+                        <img class="image-slide uk-height-medium uk-height-small@s" src="{% static 'appWebBKB/img/cardCorte.png' %}" alt="" uk-cover>
                     </li>
                     <li>
-                        <img class="image-slide" src="{% static 'appWebBKB/img/cardBarba.png' %}" alt="" uk-cover>
+                        <img class="image-slide uk-height-medium uk-height-small@s" src="{% static 'appWebBKB/img/cardBarba.png' %}" alt="" uk-cover>
                     </li>
                     <li>
-                        <img class="image-slide" src="{% static 'appWebBKB/img/cardTintura.png' %}" alt="" uk-cover>
+                        <img class="image-slide uk-height-medium uk-height-small@s" src="{% static 'appWebBKB/img/cardTintura.png' %}" alt="" uk-cover>
                     </li>
                 </ul>
 
@@ -80,6 +82,8 @@
         </section>
 
     </section>
+
+    <!-- ****** SEGUNDA SECCIÓN: SERVICIOS ****** -->
 
     <section class="second-section uk-height-viewport uk-flex uk-flex-column">
         <section
@@ -137,9 +141,9 @@
         </div>
 
         <section
-            class="uk-section uk-width-4-5 uk-width-3-4@s uk-width-1-3@l uk-height-1-1 uk-padding-small uk-margin-bottom uk-flex uk-flex-column uk-flex-center uk-align-center uk-text-center"
+            class="uk-section uk-width-4-5 uk-width-3-5@s uk-width-1-3@l uk-height-1-1 uk-padding-small uk-margin-bottom uk-flex uk-flex-column uk-flex-center uk-align-center uk-text-center"
             uk-scrollspy="cls: uk-animation-slide-bottom; repeat: true">
-            <a class="button-turnos uk-button uk-button-default uk-button-small"
+            <a class="button-turnos uk-button uk-button-default uk-button-small uk-width-1-1 uk-width-3-5@s uk-width-2-5@m uk-margin-auto"
                 href="{% url 'solicitar_turno' %}">Agendar turno</a>
             <img class="uk-width-1-4 uk-margin-auto uk-flex-center uk-flex-middle"
                 src="{% static 'appWebBKB/img/logoBKB.png' %}" alt="logo-BKB" uk-img />
@@ -147,16 +151,20 @@
 
     </section>
 
-<div class="uk-background-fixed uk-background-cover uk-height-medium uk-width-large uk-flex uk-flex-center uk-flex-middle" 
-     data-src="{% static 'appWebBKB/img/fondoCorte.png' %}" uk-img>
-    
-    <section class="uk-width-1-1 uk-flex uk-flex-column uk-flex-center uk-flex-middle"> 
-        <h1 class="h1-cut uk-text-center">THE KING OF BARBERSHOPS</h1>
-        <img class="uk-width-1-4 uk-margin-auto uk-flex-center uk-flex-middle"
+    <!-- CORTE DE SECCIONES -->
+
+    <div class="uk-background-fixed uk-width-1-1@s uk-background-cover uk-height-medium uk-width-large uk-flex uk-flex-center uk-flex-middle uk-padding-large"
+        data-src="{% static 'appWebBKB/img/fondoCorte.png' %}" uk-img>
+
+        <section class="uk-width-1-1 uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+            <h1 class="h1-cut uk-text-center">THE KING OF BARBERSHOPS</h1>
+            <img class="uk-width-1-4 uk-margin-auto uk-flex-center uk-flex-middle"
                 src="{% static 'appWebBKB/img/logoBKB.png' %}" alt="logo-BKB" uk-img />
-        <h3 class="h3-cut uk-text-center">SINCE 2015</h3>
-    </section>
-</div>
+            <h3 class="h3-cut uk-text-center">SINCE 2015</h3>
+        </section>
+    </div>
+
+    <!-- ****** TERCERA SECCIÓN: SUCURSALES ****** -->
 
     <section class="third-section uk-height-viewport uk-flex uk-flex-center uk-flex-column">
         <section
@@ -165,7 +173,7 @@
             <h1 id="id-sucursales" class="h1-servicios">SUCURSALES</h1>
         </section>
 
-        <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-padding-small uk-flex-auto uk-flex-center"
+        <div class="uk-child-width-1-3@m uk-child-width-1-2@s uk-grid-small uk-grid-match uk-padding-small uk-flex-auto uk-flex-center"
             uk-grid uk-scrollspy="target: > div; cls: uk-animation-slide-bottom; delay: 200; repeat: true">
 
             <div>
@@ -186,17 +194,56 @@
                 </div>
             </div>
         </div>
-        <section
-            class="uk-section uk-width-4-5 uk-width-3-4@s uk-width-1-3@l uk-height-1-4 uk-padding-small uk-margin-bottom uk-flex uk-flex-column uk-flex-center uk-align-center uk-text-center"
+
+        <section class="uk-section uk-margin-auto
+           uk-width-1-1 uk-width-3-4@s uk-width-1-3@l 
+           uk-height-1-4 uk-padding-small uk-margin-bottom 
+           uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-text-center"
             uk-scrollspy="cls: uk-animation-slide-bottom; repeat: true">
-            <a class="button-turnos uk-button uk-button-default uk-button-small"
+
+            <a class="button-turnos uk-button uk-button-default 
+               uk-width-1-1 uk-width-2-3@s uk-width-1-2@m uk-margin-auto-top uk-margin-auto-bottom"
                 href="{% url 'solicitar_turno' %}">Agendar turno</a>
         </section>
-    </section>
 
-    <script src="uikit/dist/js/uikit-icons.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit-icons.min.js"></script>
+        <!-- ****** CUARTA SECCIÓN: REDES SOCIALES ****** -->
+
+        <section class="uk-height-viewport uk-background-cover uk-flex uk-flex-column"
+            data-src="{% static 'appWebBKB/img/fondoSeccion4.png' %}" uk-img>
+            <section
+                class="uk-section uk-width-1-1 uk-height-1-1 uk-margin-top uk-padding-small uk-flex uk-flex-column uk-flex-center uk-text-center"
+                uk-scrollspy="cls: uk-animation-slide-bottom; repeat: true">
+                <h1 id="id-redes" class="h1-redes">SEGUINOS EN NUESTRAS REDES</h1>
+            </section>
+
+            <section class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle uk-flex-auto uk-padding-small">
+                <img class="uk-width-2-3 uk-flex-center uk-flex-middle"
+                    src="{% static 'appWebBKB/img/logoCompletoBKB.png' %}" alt="logo-BKB" uk-img />
+            </section>
+
+            <section class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle uk-flex-auto uk-padding-small">
+                <div class="uk-flex uk-flex-row uk-flex-center uk-flex-middle uk-gap-large">
+                    <a href="https://www.instagram.com/bigkingbarber/" target="_blank"
+                        uk-icon="icon: instagram; ratio: 2" class="icon-redes"></a>
+                    <a href="https://www.facebook.com/BigKingBarber" target="_blank" uk-icon="icon: facebook; ratio: 2"
+                        class="icon-redes"></a>
+                    <a href="https://wa.me/5491122768765" target="_blank" uk-icon="icon: whatsapp; ratio: 2"
+                        class="icon-redes"></a>
+                </div>
+            </section>
+
+            <section
+                class="p-copyright uk-width-1-1 uk-flex uk-text-center uk-flex-center uk-flex-middle uk-flex-auto uk-padding-small">
+                <p>© BIG KING BARBER. Todos los derechos reservados</p>
+            </section>
+
+        </section>
+
+        <!-- ******  SCRIPTS SCRIPTS SCRIPTS SCRIPTS SCRIPTS ****** -->
+
+        <script src="uikit/dist/js/uikit-icons.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit-icons.min.js"></script>
 </body>
 
 </html>
