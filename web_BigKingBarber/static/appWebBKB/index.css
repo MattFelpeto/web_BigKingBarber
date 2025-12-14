@@ -76,6 +76,11 @@
     color: #FFFFFF;
 }
 
+.fondo-cut {
+    background-attachment: fixed !important; 
+    background-size: cover !important;
+}
+
 .card-suc {
     border-radius: 8px;
     border: solid 1px white;
