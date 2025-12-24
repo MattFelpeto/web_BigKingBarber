@@ -80,16 +80,25 @@
 
                 <ul class="slideshow-items uk-slideshow-items uk-flex-initial">
                     <li>
-                        <img class="image-slide uk-height-medium uk-height-small@s uk-height-1-1@xl"
-                            src="{% static 'appWebBKB/img/banner1.png' %}" alt="" uk-cover>
+                        <img class="uk-hidden@s" src="{% static 'appWebBKB/img/banner1mobile.png' %}" alt="Banner Móvil"
+                            uk-cover>
+
+                        <img class="uk-visible@s" src="{% static 'appWebBKB/img/banner1.png' %}" alt="Banner Desktop"
+                            uk-cover>
                     </li>
                     <li>
-                        <img class="image-slide uk-height-medium uk-height-small@s"
-                            src="{% static 'appWebBKB/img/banner2.png' %}" alt="" uk-cover>
+                        <img class="uk-hidden@s" src="{% static 'appWebBKB/img/banner2mobile.png' %}" alt="Banner Móvil"
+                            uk-cover>
+
+                        <img class="uk-visible@s" src="{% static 'appWebBKB/img/banner2.png' %}" alt="Banner Desktop"
+                            uk-cover>
                     </li>
                     <li>
-                        <img class="image-slide uk-height-medium uk-height-small@s"
-                            src="{% static 'appWebBKB/img/banner3.png' %}" alt="" uk-cover>
+                        <img class="uk-hidden@s" src="{% static 'appWebBKB/img/banner3mobile.png' %}" alt="Banner Móvil"
+                            uk-cover>
+
+                        <img class="uk-visible@s" src="{% static 'appWebBKB/img/banner3.png' %}" alt="Banner Desktop"
+                            uk-cover>
                     </li>
                 </ul>
 
@@ -183,7 +192,7 @@
 
     <!-- CORTE DE SECCIONES -->
 
-    <div class="fondo-cut uk-background-fixed uk-width-1-1@s uk-background-cover uk-height-1-1@m uk-width-large uk-flex uk-flex-center uk-flex-middle uk-padding-large"
+    <div class="fondo-cut uk-background-fixed uk-width-1-1 uk-background-cover uk-height-1-1@m uk-width-large uk-flex uk-flex-center uk-flex-middle uk-padding-large"
         data-src="{% static 'appWebBKB/img/fondoCorte.png' %}" uk-img>
 
         <section class="uk-width-1-1 uk-height-large@m uk-flex uk-flex-column uk-flex-center uk-flex-middle">

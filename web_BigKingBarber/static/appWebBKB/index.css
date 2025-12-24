@@ -196,6 +196,7 @@
 .fondo-cut {
     background-attachment: fixed !important; 
     background-size: cover !important;
+    width: 100% !important; 
 }
 
 .card-suc {
